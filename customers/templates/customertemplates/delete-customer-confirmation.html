@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<section class="delete-section">
+    <div class="delete-content">
+        <form action="" method="POST">
+            {% csrf_token %}
+
+            <p>are you sure you want to delete <span style="font-style: italic; font-weight: 600;">{{customer}}</span>?
+            </p>
+            <input class="btn-2 submit-btn" type="submit" value="confirm">
+            <a href="{% url 'customers' %}">cancel</a>
+        </form>
+    </div>
+</section>
+
+{% endblock %}

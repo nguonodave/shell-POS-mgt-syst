@@ -1,0 +1,72 @@
+{% extends 'main.html' %} {% block content %}
+
+<section class="page-section">
+    <h1 class="page-heading">Employees</h1>
+    <hr />
+
+    <main class="table-content-area">
+        <div class="table-content-area-2">
+            <div>
+                <input class="search-input" type="text" placeholder="Search by date or name">
+            </div>
+
+            <div>
+                <a class="add-btn btn-2" href="{% url 'add-employee' %}">Add employee</a>
+            </div>
+
+            <div>
+                <table class="table">
+                    <colgroup>
+                        <col width="50px" />
+                        <col width="200px" />
+                        <col width="200px" />
+                        <col width="200px" />
+                        <col width="150px" />
+                        <col width="150px" />
+                        <!-- <col width="100px" /> -->
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Date Added</th>
+                            <th>Name</th>
+                            <th>Contacts</th>
+                            <th>Role</th>
+                            <th>Action</th>
+                            <!-- <th></th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for employee in employees %}
+                        <tr style="border-bottom: solid black 1px">
+                            <td class="text-center">{{forloop.counter}}</td>
+                            <td class="">{{ employee.date_created|date:"M d, Y H:i" }}</td>
+                            <td class="">{{employee}}</td>
+                            <td class="text-end">0{{ employee.contact }}</td>
+                            <td>{{ employee.job_type }}</td>
+
+                            <td>
+                                <div class="dropdown">
+                                    <button class="view-dropdown btn-2 btn-3">Choose action &rsaquo;</button>
+                                    <ul id="list-items">
+                                        <li><a class="action-btn btn" href="{% url 'employee' employee.id %}">&rsaquo;
+                                                view
+                                                details</a>
+                                        </li>
+                                        <li><a class="action-btn btn"
+                                                href="{% url 'delete-employee' employee.id %}">&rsaquo;
+                                                delete</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    </main>
+</section>
+
+{% endblock content %}

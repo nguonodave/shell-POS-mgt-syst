@@ -1,0 +1,83 @@
+{% extends 'main.html' %} {% block content %}
+
+<section class="page-section">
+    <h1 class="page-heading">Customers</h1>
+    <hr />
+
+    <main class="table-content-area">
+        <div class="table-content-area-2">
+            <div>
+                <input class="search-input" type="search" placeholder="Search by date or name">
+            </div>
+
+            <div>
+                <a class="add-btn btn-2" href="{% url 'add-customer' %}">Add customer</a>
+            </div>
+
+            <div>
+                <table class="table">
+                    <colgroup>
+                        <col width="50px" />
+                        <col width="200px" />
+                        <col width="200px" />
+                        <col width="200px" />
+                        <col width="150px" />
+                        <col width="150px" />
+                        <!-- <col width="100px" /> -->
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Date Added</th>
+                            <th>Name</th>
+                            <th>Contacts</th>
+                            <th>Customer Status</th>
+                            <th>Action</th>
+                            <!-- <th></th> -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for customer in customers %}
+                        <tr style="border-bottom: solid black 1px">
+                            <td>{{forloop.counter}}</td>
+                            <td>{{ customer.date_created|date:"M D, y H:i" }}</td>
+
+                            <td>
+                                {{customer}}
+                            </td>
+
+                            <td>0{{ customer.contact }}</td>
+
+                            <td>
+                                {% if customer.customer_status == '1' %}
+                                <span class="active-status">Active</span>
+                                {% else %}
+                                <span class="inactive-status">Inactive</span>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                <div class="dropdown">
+                                    <button class="view-dropdown btn-2 btn-3">Choose action &rsaquo;</button>
+                                    <ul id="list-items">
+                                        <li><a class="action-btn btn" href="{% url 'customer' customer.id %}">&rsaquo;
+                                                view
+                                                details</a>
+                                        </li>
+                                        <li><a class="action-btn btn"
+                                                href="{% url 'delete-customer' customer.id %}">&rsaquo;
+                                                delete</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    </main>
+</section>
+
+{% endblock content %}

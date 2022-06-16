@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<section class="page-details">
+    <main class="details-content">
+        <a class="close-details btn" href="{% url 'fuels' %}">close &times;</a>
+
+        <h1 class="details-title">{{ fuel.name }} details</h1>
+        <hr />
+
+        <section class="main-details">
+            <div>
+                <p><span>Type:</span></p>
+                <p class="margin-bottom">{{fuel}}</p>
+                <p><span>Date Added:</span></p>
+                <p class="margin-bottom">{{ fuel.date_created|date:"M d, Y H:i" }}</p>
+                <p><span>Description:</span></p>
+                <p class="margin-bottom">{{fuel.description}}</p>
+            </div>
+        </section>
+
+        <a class="edit-btn btn" href="{% url 'update-fuel' fuel.id %}">edit</a>
+    </main>
+</section>
+
+{% endblock content %}

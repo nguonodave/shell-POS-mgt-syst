@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <title>Shell Management System</title>
+</head>
+
+<body>
+
+    <section class="login-form-page">
+        <form class="login-form" action="{% url 'login' %}" method="POST">
+            {% if messages %}
+            <ul class="messages success-messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li> {% endfor %}
+            </ul>
+            {% endif %}
+            {% csrf_token %}
+            <label class="userlabel" for="usernameinput">Username:</label>
+            <input required id="usernameinput" class="login-form-input" type="text" name="username"
+                placeholder="Enter username">
+
+            <label class="passlabel" for="passwordinput">Password:</label>
+            <input required id="passwordinput" class="login-form-input" type="password" name="password"
+                placeholder="Enter password">
+            <input class="login-form-submit btn-2" type="submit" value="Login">
+        </form>
+    </section>
+
+</body>
+
+</html>

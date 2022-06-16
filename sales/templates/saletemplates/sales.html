@@ -1,0 +1,74 @@
+{% extends 'main.html' %} {% block content %}
+
+<section class="page-section sales-page">
+    <h1 class="page-heading">Sales Reports</h1>
+    <hr />
+
+    <main class="table-content-area">
+        <div class="table-content-area-2">
+            <div>
+                <input class="search-input" type="search" placeholder="Search by date or name">
+            </div>
+
+            <div>
+                <table class="sales-table">
+                    <colgroup>
+                        <col class="for-counter" width="50px" />
+                        <col class="for-date" width="155px" />
+                        <col class="for-custname" width="195px" />
+                        <col class="for-fuel" width="320px" />
+                        <col class="for-price" width="100px" />
+                        <col class="for-amountpaid" width="120px" />
+                        <col class="for-vol" width="100px" />
+                        <col class="for-served" width="140px" />
+                        <col class="for-view" width="100px" />
+                        <!-- <col width="100px" /> -->
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>date</th>
+                            <th>Customer Name</th>
+                            <th>Fuel</th>
+                            <th>Price/L</th>
+                            <th>Total Price</th>
+                            <th>Volume(L)</th>
+                            <th>Served By</th>
+                            <th>Details</th>
+                            <!-- <th></th> -->
+                        </tr>
+                    </thead>
+                    <tbody class="sales-table-body">
+                        {% for sale in sales %}
+                        <tr style="border-bottom: solid black 1px">
+                            <td class="text-center">{{forloop.counter}}</td>
+                            <td>{{ sale.date_created|date:"M D, y h:i" }}</td>
+                            <!-- <td>{{ sale.customer_name }}</td> -->
+                            <td>
+                                {% if sale.customer_name == None %}
+                                <span class="">guest</span>
+                                {% else %}
+                                <span class="">{{sale.customer_name}}</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ sale.fuel }}</td>
+                            <td>{{ sale.price }}</td>
+                            <td>{{ sale.total_price }}</td>
+                            <td>{{ sale.volume }}</td>
+                            <td>
+                                {% if sale.served_by == None %}
+                                <span class="">deleted employee</span>
+                                {% else %}
+                                <span class="">{{ sale.served_by }}</span>
+                                {% endif %}
+                            </td>
+                            <td><a class="btn-2 btn-3 view-btn" href="{% url 'sale' sale.id %}">view/print</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    </main>
+</section>
+
+{% endblock content %}

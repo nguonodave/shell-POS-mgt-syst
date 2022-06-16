@@ -1,0 +1,33 @@
+{% load static %}
+<nav class="nav">
+
+    <h3><a href="#" id="logo">Shell Management System</a></h3>
+
+    {% if request.user.is_authenticated %}
+    <div class="nav-links">
+        <ul>
+            <div class="lists">
+                <li><a href="#">Home</a></li>
+                <li><a href="{% url 'fuels' %}">Fuels</a></li>
+                <li><a href="{% url 'customers' %}">Customers</a></li>
+                <li><a href="{% url 'employees' %}">Employees</a></li>
+                <li><a href="{% url 'add-sale' %}">P.O.Sale</a></li>
+                <li><a href="{% url 'sales' %}">Sales Reports</a></li>
+                <!-- <li><a href="join.html">JOIN US</a></li> -->
+            </div>
+        </ul>
+    </div>
+
+    <div class="nav-links">
+        <ul>
+            <div class="lists lists-2">
+                <li><a href="">Welcome</a></li>
+                <li><a href="">Profile</a></li>
+
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </div>
+        </ul>
+    </div>
+    {% endif %}
+
+</nav>

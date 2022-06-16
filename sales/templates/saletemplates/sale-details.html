@@ -1,0 +1,66 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<section class="page-details sale-page-details">
+    <main class="details-content sale-details-content">
+        <a class="close-details btn sale-close-details" href="{% url 'sales' %}">close &times;</a>
+        <div class="sale-content">
+
+            <h1 class="details-title sale-details-title" style="text-align: center;">shell filling station receipt</h1>
+            <h1 class="details-title sale-details-title">
+                {% if sale.customer_name == None %}
+                <span class="">guest</span>
+                {% else %}
+                {{ sale.customer_name }}
+                {% endif %}
+                - {{ sale.fuel }} - {{ sale.volume }}
+            </h1>
+            <hr />
+
+            <div class="sale-main-details">
+                <p class="sale-margin-bottom"><span>Date of transaction: </span> <span>{{sale.date_created}}</span> </p>
+                <p class="sale-margin-bottom">
+                    <span>Customer: </span>
+                    {% if sale.customer_name == None %}
+                    <span>guest</span>
+                    {% else %}
+                    <span>{{sale.customer_name}}</span>
+                    {% endif %}
+                </p>
+
+                <table class="fuel-receipt-part">
+                    <colgroup>
+                        <col class="for-fuel" width="40%" />
+                        <col class="for-volume" width="30%" />
+                        <col class="for-amount_paid" width="30%" />
+                    </colgroup>
+                    <thead class="fuel-lists">
+                        <tr>
+                            <th>fuel</th>
+                            <th>volume(L)</th>
+                            <th>amount_paid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{sale.fuel}}</td>
+                            <td>{{sale.volume}}</td>
+                            <td>{{sale.amount_paid}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="sale-margin-bottom"><span class="bold">SUBTOTAL: </span> <span>{{sale.total_price}}</span>
+                </p>
+                <p class="sale-margin-bottom"><span class="bold">AMOUNTPAID: </span> <span>{{sale.amount_paid}}</span>
+                </p>
+                <p class="sale-margin-bottom"><span class="bold">BALANCE: </span> <span>{{sale.balance}}</span> </p>
+                <p class="sale-margin-bottom"><span>YOU WERE SERVED BY: </span> <span>{{sale.served_by}}</span> </p>
+
+            </div>
+        </div>
+    </main>
+</section>
+
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<section class="page-details">
+    <main class="details-content">
+        <a class="close-details btn" href="{% url 'customers' %}">close &times;</a>
+
+        <h1 class="details-title">{{ customer.username }} details</h1>
+        <hr />
+
+        <section class="main-details">
+            <div>
+                <p><span>Name:</span></p>
+                <p class="margin-bottom">{{customer}}</p>
+                <p><span>Date Added:</span></p>
+                <p class="margin-bottom">{{ customer.date_added|date:"M d, Y H:i" }}</p>
+                <p><span>Contacts:</span></p>
+                <p class="margin-bottom">0{{customer.contact}}</p>
+            </div>
+        </section>
+
+        <a class="edit-btn btn" href="{% url 'update-customer' customer.id %}">edit</a>
+    </main>
+</section>
+
+{% endblock content %}
