@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from shellManagementSystem.decorators import allowed_users
 from . models import Customer
 from . forms import CustomerForm
 
 # Create your views here.
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def customers(request):    
     customers = Customer.objects.order_by('-date_created')
     # guest = Customer.objects.get(customer_status=2)
@@ -14,12 +16,14 @@ def customers(request):
     return render(request, 'customertemplates/customers.html', context)
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def customer(request, pk):
     customer = Customer.objects.get(id=pk)    
     context = {'customer':customer}
     return render(request, 'customertemplates/customer-details.html', context)
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def addCustomer(request):
     form = CustomerForm()
 
@@ -33,6 +37,7 @@ def addCustomer(request):
     return render(request, 'customertemplates/add-customer-form.html', context)
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def updateCustomer(request, pk):
     customer = Customer.objects.get(id=pk)
     form = CustomerForm(instance=customer)
@@ -47,6 +52,7 @@ def updateCustomer(request, pk):
     return render(request, 'customertemplates/add-customer-form.html', context)
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def deleteCustomer(request, pk):
     customer = Customer.objects.get(id=pk) 
     if request.method == 'POST':

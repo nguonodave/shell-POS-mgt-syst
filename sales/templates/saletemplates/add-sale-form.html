@@ -20,7 +20,7 @@
                 <div class="form-label"><label for="id_price">price/L :</label></div>
                 <div class="form-field">
                     {{form.price}}
-                    <p class="form-error" style="color: red;"> {{form.errors}} </p>
+                    <p class="form-error" style="color: red;"> {{form.price.errors}} </p>
                 </div>
             </div>
 
@@ -52,9 +52,6 @@
             <input class="btn-2 submit-btn" type="submit" value="Save" />
         </form>
 
-        <!-- <div class="form-image">
-            <img src="/static/images/shell pic.PNG" alt="">
-        </div> -->
     </div>
 </section>
 

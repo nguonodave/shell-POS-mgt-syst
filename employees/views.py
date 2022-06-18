@@ -1,19 +1,23 @@
+from email.headerregistry import Group
+from tokenize import group
+from unicodedata import name
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
+
+from customers.views import customer
 # from django.contrib.auth.forms import UserCreationForm
 from . forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib import messages
 from . models import Employee
 from . forms import EmployeeForm
+from shellManagementSystem.decorators import unauthenticated_user, allowed_users
 
 
 # login view
-def loginUser(request):    
-    if request.user.is_authenticated:
-        return redirect('fuels')
-
+@unauthenticated_user
+def loginUser(request):
     if request.method == 'POST':
         # setting the username and password
         username = request.POST['username'] # getting the entered value(username) from the form in the browser
@@ -31,7 +35,7 @@ def loginUser(request):
         # allowing access to returned page on successful authentication
         if user is not None:
             login(request, user) # using the imported login module to allow access of the loged in employee
-            return redirect('fuels')
+            return redirect('add-sale')
         else:
             messages.error(request, 'username or pssword is incorrect')
     return render(request, 'employeetemplates/login-register.html')
@@ -67,6 +71,7 @@ def logoutUser(request):
 
 # employees page view
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def employees(request):    
     employees = Employee.objects.order_by('-date_created')
     context = {'employees':employees}    
@@ -74,6 +79,7 @@ def employees(request):
 
 # employees details view
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def employee(request, pk):
     employee = Employee.objects.get(id=pk)    
     context = {'employee':employee}
@@ -94,6 +100,7 @@ def employee(request, pk):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def addEmployee(request):
     form = CustomUserCreationForm()
 
@@ -104,12 +111,16 @@ def addEmployee(request):
             user.username = user.username.lower()
             user.save()
 
-            messages.success(request, 'wowww!')
+            group = Group.objects.get(name = 'customer service')
+            user.groups.add(group)
+
+            messages.success(request, 'User created successfully')
 
     context = {'form':form}
     return render(request, 'employeetemplates/add-employee-form.html', context)
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def updateEmployee(request, pk):
     employee = Employee.objects.get(id=pk)
     form = EmployeeForm(instance=employee)
@@ -124,6 +135,7 @@ def updateEmployee(request, pk):
     return render(request, 'employeetemplates/update-employee-form.html', context)
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def deleteEmployee(request, pk):
     employee = Employee.objects.get(id=pk) 
     if request.method == 'POST':

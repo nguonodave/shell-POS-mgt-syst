@@ -1,16 +1,19 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from shellManagementSystem.decorators import allowed_users
 from . models import Fuel
 from . forms import FuelForm
 
 # Create your views here.
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def fuels(request):    
     fuels = Fuel.objects.order_by('-date_created')
     context = {'fuels':fuels}    
     return render(request, 'fueltemplates/fuels.html', context)
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def fuel(request, pk):
     fuel = Fuel.objects.get(id=pk)    
     context = {'fuel':fuel}
@@ -18,6 +21,7 @@ def fuel(request, pk):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def addFuelType(request):
     form = FuelForm()
 
@@ -31,6 +35,7 @@ def addFuelType(request):
     return render(request, 'fueltemplates/add-fuel-form.html', context)
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def updateFuel(request, pk):
     fuel = Fuel.objects.get(id=pk)
     form = FuelForm(instance=fuel)
@@ -45,6 +50,7 @@ def updateFuel(request, pk):
     return render(request, 'fueltemplates/add-fuel-form.html', context)
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def deleteFuel(request, pk):
     fuel = Fuel.objects.get(id=pk) 
     if request.method == 'POST':
