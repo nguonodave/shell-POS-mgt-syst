@@ -8,6 +8,10 @@
 ul {
 	list-style: none;
 }
+
+tr:hover {
+	background-color: rgba(190, 190, 190, 0.26);
+}
 a {
 	text-decoration: none;
 }
@@ -127,7 +131,7 @@ a {
 	right: 50%;
 	top: 5px;
 	padding: 5px;
-	width: 30%;
+	width: 40%;
 	transform: translateX(50%);
 }
 

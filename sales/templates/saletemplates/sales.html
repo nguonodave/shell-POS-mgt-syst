@@ -7,7 +7,11 @@
     <main class="table-content-area">
         <div class="table-content-area-2">
             <div>
-                <input class="search-input" type="search" placeholder="Search by date or name">
+                <form action="{% url 'sales' %}" method="GET">
+                    <input class="search-input" type="text" placeholder="Search by customer name, fuel, or employee"
+                        name="search_query" value="{{search_query}}">
+                    <!-- <input class="search-button" type="submit" value="Search"> -->
+                </form>
             </div>
 
             <div>
@@ -51,7 +55,13 @@
                                 <span class="">{{sale.customer_name}}</span>
                                 {% endif %}
                             </td>
-                            <td>{{ sale.fuel }}</td>
+                            <td>
+                                {% if sale.fuel == None %}
+                                <span class="">Unavailable for sale</span>
+                                {% else %}
+                                <span class="">{{ sale.fuel }}</span>
+                                {% endif %}
+                            </td>
                             <td>{{ sale.price }}</td>
                             <td>{{ sale.total_price }}</td>
                             <td>{{ sale.volume }}</td>

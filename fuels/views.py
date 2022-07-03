@@ -1,15 +1,22 @@
+import profile
+import re
+from unittest.mock import seal
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+# from jmespath import search
 from shellManagementSystem.decorators import allowed_users
 from . models import Fuel
 from . forms import FuelForm
+from . utils import searchFuels
 
 # Create your views here.
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
-def fuels(request):    
-    fuels = Fuel.objects.order_by('-date_created')
-    context = {'fuels':fuels}    
+def fuels(request):
+
+    fuels, search_query = searchFuels(request)
+
+    context = {'fuels':fuels, 'search_query':search_query}
     return render(request, 'fueltemplates/fuels.html', context)
 
 @login_required(login_url='login')

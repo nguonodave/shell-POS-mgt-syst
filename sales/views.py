@@ -3,15 +3,18 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from . models import Sale
 from . forms import SaleForm
+from . utils import searchSales
 
 # Create your views here.
 @login_required(login_url='login')
-def sales(request):    
-    sales = Sale.objects.order_by('-date_created')
+def sales(request):
+
+    sales, search_query = searchSales(request)
+    
     # totalamount = Sale.objects.get(volume=33)
     # totalamount.volume = (totalamount.price)*2
     # totalamount.save()
-    context = {'sales':sales}    
+    context = {'sales':sales, 'search_query':search_query}    
     return render(request, 'saletemplates/sales.html', context)
 
 @login_required(login_url='login')

@@ -7,7 +7,11 @@
     <main class="table-content-area">
         <div class="table-content-area-2">
             <div>
-                <input class="search-input" type="text" placeholder="Search by date or name">
+                <form action="{% url 'fuels' %}" method="GET">
+                    <input class="search-input" type="text" placeholder="Search by name or fuel status"
+                        name="search_query" value="{{search_query}}">
+                    <!-- <input class="search-button" type="submit" value="Search"> -->
+                </form>
             </div>
 
             <div>
@@ -45,7 +49,7 @@
                             <td class="text-end">{{ fuel.price }}/L</td>
 
                             <td>
-                                {% if fuel.fuel_status == '1' %}
+                                {% if fuel.fuel_status == 'active' %}
                                 <span class="active-status">Active</span> {% else %}
                                 <span class="inactive-status">Inactive</span>
                                 {% endif %}

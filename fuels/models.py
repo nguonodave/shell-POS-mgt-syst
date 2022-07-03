@@ -16,7 +16,7 @@ class Fuel(models.Model):
     )
     name = models.CharField(max_length=250, choices=FUEL_TYPES, unique=True)
     description = models.TextField(null=True, blank=False)  
-    fuel_status = models.CharField(max_length=8, null=True, choices=(('1', 'Active'),('0', 'Inactive')), default=1)
+    fuel_status = models.CharField(max_length=8, null=True, choices=(('active', 'Active'),('inactive', 'Inactive')), default='active')
     price = models.FloatField(validators=[MinValueValidator(100), MaxValueValidator(200)], max_length=(15,2))      
     date_created = models.DateTimeField(default=datetime.now)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)

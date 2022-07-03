@@ -3,16 +3,19 @@ from django.contrib.auth.decorators import login_required
 from shellManagementSystem.decorators import allowed_users
 from . models import Customer
 from . forms import CustomerForm
+from . utils import searchCustomers
 
 # Create your views here.
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
-def customers(request):    
-    customers = Customer.objects.order_by('-date_created')
+def customers(request): 
+
+    customers, search_query = searchCustomers(request)
+
     # guest = Customer.objects.get(customer_status=2)
     # guest.username = "guest"
     # guest.save()
-    context = {'customers':customers}    
+    context = {'customers':customers, 'search_query':search_query}    
     return render(request, 'customertemplates/customers.html', context)
 
 @login_required(login_url='login')

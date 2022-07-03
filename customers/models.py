@@ -12,7 +12,7 @@ class Customer(models.Model):
     contact = models.IntegerField(validators=[MinValueValidator(100000000), MaxValueValidator(999999999)], unique=True, blank=False, default=0)
     email = models.EmailField(max_length=50, unique=True, null=True, blank=False)   
     country = models.ForeignKey(Country, null=True, blank=False, on_delete=models.CASCADE)
-    customer_status = models.CharField(max_length=8, null=True, choices=(('1', 'Active'),('0', 'Inactive')), default=1)
+    customer_status = models.CharField(max_length=8, null=True, choices=(('active', 'Active'),('inactive', 'Inactive')), default='active')
     date_created = models.DateTimeField(default=datetime.now)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 

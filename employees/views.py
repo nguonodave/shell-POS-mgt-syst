@@ -3,6 +3,7 @@ from tokenize import group
 from unicodedata import name
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
+from countries.models import Country
 
 from customers.views import customer
 # from django.contrib.auth.forms import UserCreationForm
@@ -10,9 +11,11 @@ from . forms import CustomUserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.contrib import messages
+from django.db.models import Q
 from . models import Employee
 from . forms import EmployeeForm
 from shellManagementSystem.decorators import unauthenticated_user, allowed_users
+from . utils import searchEmployees
 
 
 # login view
@@ -72,9 +75,11 @@ def logoutUser(request):
 # employees page view
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
-def employees(request):    
-    employees = Employee.objects.order_by('-date_created')
-    context = {'employees':employees}    
+def employees(request):
+
+    employees, search_query = searchEmployees(request)
+
+    context = {'employees':employees, 'search_query':search_query}    
     return render(request, 'employeetemplates/employees.html', context)
 
 # employees details view

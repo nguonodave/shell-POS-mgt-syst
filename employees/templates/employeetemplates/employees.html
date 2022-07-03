@@ -7,7 +7,11 @@
     <main class="table-content-area">
         <div class="table-content-area-2">
             <div>
-                <input class="search-input" type="text" placeholder="Search by date or name">
+                <form action="{% url 'employees' %}" method="GET">
+                    <input class="search-input" type="text" placeholder="Search by name, contact, country, or role"
+                        name="search_query" value="{{search_query}}">
+                    <!-- <input class="search-button" type="submit" value="Search"> -->
+                </form>
             </div>
 
             <div>
@@ -20,7 +24,8 @@
                         <col width="50px" />
                         <col width="200px" />
                         <col width="200px" />
-                        <col width="200px" />
+                        <col width="120px" />
+                        <col width="80px" />
                         <col width="150px" />
                         <col width="150px" />
                         <!-- <col width="100px" /> -->
@@ -31,6 +36,7 @@
                             <th>Date Added</th>
                             <th>Name</th>
                             <th>Contacts</th>
+                            <th>Country</th>
                             <th>Role</th>
                             <th>Action</th>
                             <!-- <th></th> -->
@@ -43,6 +49,7 @@
                             <td class="">{{ employee.date_created|date:"M d, Y H:i" }}</td>
                             <td class="">{{employee}}</td>
                             <td class="text-end">0{{ employee.contact }}</td>
+                            <td class="">{{ employee.country }}</td>
                             <td>{{ employee.job_type }}</td>
 
                             <td>
