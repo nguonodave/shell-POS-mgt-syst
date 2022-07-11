@@ -6,50 +6,55 @@
         <form class="add-form sale-add-form" method="POST">
             {% csrf_token %}
             <!-- Input:Text -->
-            <div class="form-area">
-                <div class="form-label"><label for="">customer_name :</label></div>
-                <div class="form-field">{{form.customer_name}}</div>
-            </div>
 
-            <div class="form-area">
-                <div class="form-label"><label for="">fuel :</label></div>
-                <div class="form-field">{{form.fuel}}</div>
-            </div>
-
-            <div class="form-area">
-                <div class="form-label"><label for="id_price">price/L :</label></div>
-                <div class="form-field">
-                    {{form.price}}
-                    <p class="form-error" style="color: red;"> {{form.price.errors}} </p>
+            <div class="fuel-section">
+                <div class="radio-forms">
+                    <div class="fuel-form-label"><label for="">available fuel</label></div>
+                    <div class="fuel-form-field">{{form.fuel}}</div>
                 </div>
             </div>
 
-            <div class="form-area">
-                <div class="form-label"><label for="id_total_price">sale_price_amount :</label></div>
-                <div class="form-field">{{form.total_price}}</div>
-            </div>
+            <div class="sale-input-section">
+                <div class="form-area">
+                    <div class="form-label"><label for="">customer_name :</label></div>
+                    <div class="form-field">{{form.customer_name}}</div>
+                </div>
 
-            <div class="form-area">
-                <div class="form-label"><label for="id_volume">volume :</label></div>
-                <div class="form-field">{{form.volume}}</div>
-            </div>
+                <div class="form-area">
+                    <div class="form-label"><label for="id_price">price/L :</label></div>
+                    <div class="form-field">
+                        {{form.price}}
+                        <p class="form-error" style="color: red;"> {{form.price.errors}} </p>
+                    </div>
+                </div>
 
-            <div class="form-area">
-                <div class="form-label"><label for="id_amount_paid">amount_paid :</label></div>
-                <div class="form-field">{{form.amount_paid}}</div>
-            </div>
+                <div class="form-area">
+                    <div class="form-label"><label for="id_total_price">sale_price_amount :</label></div>
+                    <div class="form-field">{{form.total_price}}</div>
+                </div>
 
-            <div class="form-area">
-                <div class="form-label"><label for="id_balance">balance :</label></div>
-                <div class="form-field">{{form.balance}}</div>
-            </div>
+                <div class="form-area">
+                    <div class="form-label"><label for="id_volume">volume :</label></div>
+                    <div class="form-field">{{form.volume}}</div>
+                </div>
 
-            <div class="form-area">
-                <div class="form-label"><label for="">served_by :</label></div>
-                <div class="form-field">{{form.served_by}}</div>
-            </div>
+                <div class="form-area">
+                    <div class="form-label"><label for="id_amount_paid">amount_paid :</label></div>
+                    <div class="form-field">{{form.amount_paid}}</div>
+                </div>
 
-            <input class="btn-2 submit-btn" type="submit" value="Save" />
+                <div class="form-area balance">
+                    <div class="form-label"><label for="id_balance">balance :</label></div>
+                    <div class="form-field">{{form.balance}}</div>
+                </div>
+
+                <div class="form-area served_by">
+                    <div class="form-label"><label for="">served_by :</label></div>
+                    <div class="form-field">{{form.served_by}}</div>
+                </div>
+
+                <input class="btn-2 submit-btn" type="submit" value="Save" />
+            </div>
         </form>
 
     </div>

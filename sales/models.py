@@ -16,7 +16,7 @@ class Sale(models.Model):
     total_price = models.FloatField(max_length=(15,2))
     amount_paid = models.IntegerField(null=True, blank=False)
     balance = models.DecimalField(validators=[MinValueValidator(0)], max_digits=20, decimal_places=4, null=True, blank=False)
-    served_by = models.ForeignKey(Employee, on_delete=models.SET_NULL, null=True)
+    served_by = models.CharField(max_length=250, blank=True, null=True)
     date_created = models.DateTimeField(default=datetime.now)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 

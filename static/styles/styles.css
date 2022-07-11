@@ -288,13 +288,18 @@ th:nth-last-child(1) {
 }
 
 .form-area {
-	display: flex;
-	justify-content: space-between;
+	/* display: flex;
+	justify-content: space-between; */
 	max-width: 60%;
 }
 
 .submit-btn {
 	margin-top: 10px;
+}
+
+.served_by,
+.balance {
+	display: none;
 }
 
 .delete-content {
@@ -386,7 +391,7 @@ th:nth-last-child(1) {
 }
 
 .form-label {
-	margin-right: 25px;
+	margin-right: 50px;
 }
 
 .large-arrow {
@@ -435,14 +440,51 @@ td:nth-last-child(1) {
 	margin-top: 0;
 }
 
-/* .sale-add-form {
+.sale-input-section {
+	padding-right: 40px;
+}
+
+.radio-forms {
+	/* background-color: rgba(27, 201, 94); */
+	padding: 100px 100px 100px 20px;
+	position: absolute;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	width: 45%;
+}
+
+.radio-inputs {
+	border-top: 20px;
+	padding-top: 20px;
+	cursor: pointer;
+}
+
+.fuel-form-field {
+	display: grid;
+	grid-template-columns: auto;
+	font-size: 30px;
+	border-top: 30px;
+	text-align: center;
+	cursor: pointer;
+	/* background-color: red; */
+}
+
+.sale-add-form {
 	display: flex;
-	flex-direction: column;
-} */
+	justify-content: space-between;
+}
+
+.fuel-form-label {
+	font-size: 40px;
+	color: rgba(255, 0, 0, 0.8);
+	text-align: center;
+	text-transform: capitalize;
+}
 
 .sale-form-content {
 	/* background-color: rgb(44, 197, 38); */
-	background: url(/static/images/shellpic2.jpg);
+	/* background: url(/static/images/shellpic2.jpg); */
 	background-repeat: no-repeat;
 	background-position: right;
 	/* background-size: cover; */
@@ -455,7 +497,8 @@ td:nth-last-child(1) {
 }
 
 .sale-form-input {
-	width: 500px;
+	width: 600px;
+	/* position: absolute; */
 }
 
 .form-label {
